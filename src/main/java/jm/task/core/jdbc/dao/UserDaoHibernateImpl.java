@@ -4,6 +4,8 @@ import jm.task.core.jdbc.model.User;
 
 import java.util.List;
 
+// ЭТОТ КЛАСС ПОКА НЕ ТРОГАТЬ - 1 задача
+
 public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
 
