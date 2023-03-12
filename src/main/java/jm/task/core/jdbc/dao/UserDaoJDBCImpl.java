@@ -3,16 +3,16 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//
-
 public class UserDaoJDBCImpl extends Util implements UserDao {
 
     Connection connection = getConnection();
+
 
     public UserDaoJDBCImpl() {
 
@@ -31,7 +31,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void dropUsersTable() throws SQLException {
 
-        String sql = "DROP TABLE mydatabasetest.users";
+        String sql = "DROP TABLE mydatabasetest.user";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
@@ -41,7 +41,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
 
-        String sql = "INSERT INTO mydatabasetest.users (name, lastName, age) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO mydatabasetest.user (name, lastName, age) VALUES (?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
@@ -57,7 +57,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void removeUserById(long id) throws SQLException {
 
-        String sql = "DELETE FROM mydatabasetest.users WHERE id = ?";
+        String sql = "DELETE FROM mydatabasetest.user WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
@@ -68,7 +68,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public List<User> getAllUsers() {
 
-        String sql = "SELECT * FROM mydatabasetest.users";
+        String sql = "SELECT * FROM mydatabasetest.user";
 
         List<User> result = new ArrayList<>();
 
@@ -94,7 +94,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void cleanUsersTable() throws SQLException {
 
-        String sql = "TRUNCATE TABLE mydatabasetest.users";
+        String sql = "TRUNCATE TABLE mydatabasetest.user";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
